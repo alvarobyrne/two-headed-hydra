@@ -2,6 +2,8 @@ import "./style.css";
 import REGL from "regl";
 import { Hydra, generators } from "hydra-ts";
 import ArrayUtils from "hydra-ts/src/lib/array-utils";
+import Editor from "./Editor";
+import createHydraAutocomplete from "./hydra-autocomplete";
 
 const WIDTH = 512;
 const HEIGHT = 512;
@@ -16,6 +18,8 @@ const getCanvas = (parent: HTMLElement): HTMLCanvasElement => {
 };
 
 ArrayUtils.init();
+
+let hydraAutocomplete;
 class HydraInstance {
   hydra: Hydra;
   constructor(canvas: HTMLCanvasElement) {
@@ -47,10 +51,14 @@ class HydraInstance {
   }
 }
 const APP_ELEMENT = document.body.querySelector("#app");
+
 const h1 = new HydraInstance(getCanvas(APP_ELEMENT));
 const h2 = new HydraInstance(getCanvas(APP_ELEMENT));
 setTimeout(() => {
   h1.eval("osc().out(o0)");
   console.log("pin");
   h2.eval("voronoi().out(o0)");
-}, 3000);
+}, 1000);
+hydraAutocomplete = createHydraAutocomplete(h1.hydra);
+const e = new Editor(hydraAutocomplete);
+console.log("e: ", e);

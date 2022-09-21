@@ -24,14 +24,24 @@ body {
 
 }
 
-  #app{
-    display: flex;
-    height: 100vh;
-    justify-content: space-between;
+#app {
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
 
-  }
-  canvas{
-    width: 50vw;
+}
 
-  }
+canvas {
+  width: 50vw;
 
+}
+
+#editor {
+  position: absolute;
+  width: 50vw;
+  height: 100vh;
+  border: 1px solid salmon;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
