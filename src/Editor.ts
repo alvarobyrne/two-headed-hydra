@@ -17,13 +17,12 @@ import EventEmitter from "eventemitter3";
 import { type CompletionSource } from "@codemirror/autocomplete";
 
 export default class Editor extends EventEmitter {
-  constructor(autoComplete: CompletionSource) {
+  constructor(autoComplete: CompletionSource, parent: HTMLElement) {
     super();
     // const emitter = new EventEmitter();
     // console.log("emitter: ", emitter);
     const config = new HydraEditorConfiguration();
 
-    const parent = document.querySelector("#editor");
     const hydraExtension = config.getConfiguration(autoComplete);
     const view = new EditorView({
       lineWrapping: true,

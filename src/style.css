@@ -27,16 +27,20 @@
 
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
   overflow: hidden;
 
 }
 
+
+.editor>.cm-editor {
+  background-color: transparent;
+}
+
+
 #app {
   display: flex;
   height: 100vh;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
 }
 
@@ -45,8 +49,10 @@ canvas {
 
 }
 
-#editor {
+#editors {
   position: absolute;
+  display: flex;
+  height: 100vh;
   /* width: 50vw; */
   /* height: 100vh; */
   /* border: 1px solid salmon; */

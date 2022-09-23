@@ -60,5 +60,9 @@ setTimeout(() => {
   h2.eval("voronoi().out(o0)");
 }, 1000);
 hydraAutocomplete = createHydraAutocomplete(h1.hydra);
-const e = new Editor(hydraAutocomplete);
-console.log("e: ", e);
+// const hydraAutocomplete2 = createHydraAutocomplete(h2.hydra);
+(() => {
+  const e0 = new Editor(hydraAutocomplete, document.querySelector("#editor0"));
+  const e1 = new Editor(hydraAutocomplete, document.querySelector("#editor1"));
+})();
+// console.log("e: ", e);
