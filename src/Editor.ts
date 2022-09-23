@@ -25,7 +25,7 @@ export default class Editor extends EventEmitter {
 
     const parent = document.querySelector("#editor");
     const hydraExtension = config.getConfiguration(autoComplete);
-    const view0 = new EditorView({
+    const view = new EditorView({
       lineWrapping: true,
       state: EditorState.create({
         extensions: [
@@ -45,5 +45,16 @@ export default class Editor extends EventEmitter {
       }),
       parent,
     });
+    // return;
+    (async () => {
+      const code = await fetch("code.txt");
+      const response = await code.text();
+      // console.log("response: ", response);
+      // console.log("code: ", code);
+      const transaction = view.state.update({
+        changes: { from: 0, insert: response },
+      });
+      view.dispatch(transaction);
+    })();
   }
 }
