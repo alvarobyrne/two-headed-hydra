@@ -61,7 +61,7 @@ export default (hydra: Hydra) => {
     };
   });
 
-  hydraFuncs.forEach((h) => {
+  hydraFuncs.forEach((h: any) => {
     if (h.type === "combine" || h.type === "combineCoord") {
       h.inputs = [{ type: "vec4", name: "texture" }, ...h.inputs];
     }
@@ -86,20 +86,22 @@ export default (hydra: Hydra) => {
       h.inputs !== undefined
         ? `${h.name}( ${h.inputs
             .map(
-              (input) =>
+              (input: any) =>
                 `${input.name}${input.default ? ` = ${input.default}` : ""}`
             )
             .join(", ")} )`
         : "",
   }));
-
+  //@ts-ignore
   functionOptions.push({ label: `out()` });
 
   const srcOptions = functionOptions.filter((h) => h.type === "src");
   const srcNames = srcOptions.map((h) => h.name);
   const chainOptions = functionOptions.filter((h) => h.type != "src");
+  //@ts-ignore
   const outputOptions = synthParams.filter((h) => h.type === "Output");
   const externalSourceOptions = synthParams.filter(
+    //@ts-ignore
     (h) => h.type === "HydraSource"
   );
   // const textureOptions = [...outputOptions]
@@ -114,6 +116,7 @@ export default (hydra: Hydra) => {
     .filter((h) => h.type === "combine" || h.type === "combineCoord")
     .map((h) => h.name);
   const hydraGlobals = synthParams.filter(
+    //@ts-ignore
     (h) => h.type === "function" && !srcNames.includes(h.name) //||      userConstants.includes(h.label)// TODO: removecomment after figuring out what the sandbox is
   );
   console.log("functionOptions", functionOptions, srcNames, synthParams);

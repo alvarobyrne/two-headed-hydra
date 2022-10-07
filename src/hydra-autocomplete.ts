@@ -37,7 +37,7 @@ const createAutocomplete =
     chainOptions,
     outputOptions,
     hydraGlobals,
-  }): CompletionSource =>
+  }: any): CompletionSource =>
   (context: CompletionContext): CompletionResult | null => {
     let word = context.matchBefore(/\w*/);
     console.log("word: ", word);
@@ -46,7 +46,7 @@ const createAutocomplete =
 
     const parseArguments = (node: SyntaxNode) => {
       let object = node.parent?.getChild("Expression");
-      let variableName = context.state.sliceDoc(object.from, object.to);
+      let variableName = context.state.sliceDoc(object?.from, object?.to);
       let lastValue = getObjectFromName(variableName);
       // console.log('last value', lastValue, combineNames)
       if (lastValue === "out") {
@@ -109,6 +109,7 @@ const createAutocomplete =
         // s0, s1, a,
         let variableName = context.state.sliceDoc(object.from, object.to);
         // console.log('completing properties on object', variableName)
+        //@ts-ignore
         const obj = window[variableName];
         if (nodeBefore.parent?.parent?.name === "ArrowFunction") {
           const options = Object.keys(obj).map((o) => ({ label: o }));

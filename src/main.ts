@@ -8,7 +8,7 @@ import createHydraAutocomplete from "./hydra-autocomplete";
 const WIDTH = 512;
 const HEIGHT = 512;
 const DENSITY = 2;
-const getCanvas = (parent: HTMLElement): HTMLCanvasElement => {
+const getCanvas = (parent: Element | null): HTMLCanvasElement => {
   const canvas = document.createElement("canvas");
   canvas.style.backgroundColor = "#000000";
   canvas.width = WIDTH;
@@ -23,7 +23,7 @@ let hydraAutocomplete;
 class HydraInstance {
   hydra: Hydra;
   constructor(canvas: HTMLCanvasElement) {
-    const regl = REGL(canvas);
+    const regl = REGL(canvas) as any;
 
     const hydra = new Hydra({
       width: WIDTH * DENSITY,
