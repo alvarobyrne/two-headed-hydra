@@ -33,14 +33,14 @@ class HydraEditorConfiguration extends EventEmitter {
     const hydraKeymaps = Object.entries(hydraKeys).map(([key, val]) => ({
       key: key,
       run: (opts: any) => {
-        console.log("called", val, "opts", opts);
+        // console.log("called", val, "opts", opts);
         let text: string | boolean = "";
         if (val === "editor:evalLine") {
           text = getLine(opts);
         } else if (val === EVAL_BLOCK_EVENT) {
           text = getBlock(opts);
         }
-        console.log("text", text);
+        // console.log("text", text);
         self.emit(val, text);
       },
     }));
@@ -54,7 +54,7 @@ class HydraEditorConfiguration extends EventEmitter {
       //  foldGutter(),
       EditorView.domEventHandlers({
         click: (event, view) => {
-          console.log("click", event, view);
+          // console.log("click", event, view);
           // startCompletion(view)
         },
         touchstart: (_, view) => {

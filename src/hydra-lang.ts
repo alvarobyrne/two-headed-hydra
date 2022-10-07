@@ -7,9 +7,9 @@ import {
   modifierTransforms,
 } from "hydra-ts/src/glsl/transformDefinitions";
 generatorTransforms;
-console.log("generatorTransforms: ", generatorTransforms);
+// console.log("generatorTransforms: ", generatorTransforms);
 modifierTransforms;
-console.log("modifierTransforms: ", modifierTransforms);
+// console.log("modifierTransforms: ", modifierTransforms);
 const hydraFunctions = () => [...generatorTransforms, ...modifierTransforms];
 const filterOut = ["prev", "sum"];
 
@@ -20,7 +20,7 @@ const getFunctionText = (f = () => {}) => {
 
 export default (hydra: Hydra) => {
   const synthParams = Object.entries(hydra.synth).map(([key, val]) => {
-    console.log(key, val, typeof val);
+    // console.log(key, val, typeof val);
     let label = key;
     let type = typeof val;
     let info = "";
@@ -119,7 +119,7 @@ export default (hydra: Hydra) => {
     //@ts-ignore
     (h) => h.type === "function" && !srcNames.includes(h.name) //||      userConstants.includes(h.label)// TODO: removecomment after figuring out what the sandbox is
   );
-  console.log("functionOptions", functionOptions, srcNames, synthParams);
+  // console.log("functionOptions", functionOptions, srcNames, synthParams);
   return {
     srcOptions,
     chainOptions,
