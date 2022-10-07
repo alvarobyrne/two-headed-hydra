@@ -1,36 +1,39 @@
-// import { EditorView, KeyBinding } from "@codemirror/view";
+// from https://github.com/ojack/hydra-editor-cm6/blob/main/src/evalKeymaps.js
+import { EditorView, KeyBinding } from "@codemirror/view";
+// import { type EditorState } from "@codemirror/state";
 
 // import { evaluate } from "./highlight";
 // import { sendOSC } from "../../client/osc";
 // from https://github.com/mindofmatthew/text.management/blob/main/app/codemirror/evaluate/commands.ts
-
-export function getSelection({ state, dispatch }) {
+//@ts-ignore
+export function getSelection({ state, dispatch }: EditorView) {
   if (state.selection.main.empty) return false;
-  console.log('running get selection')
- // dispatch({ effects: get.of(state.selection.main) });
+  console.log("running get selection");
+  // dispatch({ effects: get.of(state.selection.main) });
   //return true;
 
   //TODO: Move this away
   let { from, to } = state.selection.main;
   let text = state.doc.sliceString(from, to);
-  return text
-//  return sendOSC("/tidal/code", text);
+  return text;
+  //  return sendOSC("/tidal/code", text);
 }
-
-export function getLine({ state, dispatch }) {
+//@ts-ignore
+export function getLine({ state, dispatch }: EditorView) {
   const line = state.doc.lineAt(state.selection.main.from);
- // dispatch({ effects: get.of(line) });
+  // dispatch({ effects: get.of(line) });
   //return true;
 
   //TODO: Move this away
   let { from, to } = line;
   let text = state.doc.sliceString(from, to);
-  console.log('running get line')
-  return text
+  console.log("running get line");
+  return text;
   //return sendOSC("/tidal/code", text);
 }
 
-export function getBlock({ state, dispatch }) {
+//@ts-ignore
+export function getBlock({ state, dispatch }: EditorView): string | boolean {
   let { doc, selection } = state;
   let { text, number } = state.doc.lineAt(selection.main.from);
 
@@ -55,7 +58,7 @@ export function getBlock({ state, dispatch }) {
   //TODO: Move this away
   text = state.doc.sliceString(from, to);
   //return sendOSC("/tidal/code", text);
-  return text
+  return text;
 }
 
 // export const evalKeymap = [
