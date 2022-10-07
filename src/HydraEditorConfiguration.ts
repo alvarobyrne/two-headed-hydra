@@ -19,21 +19,25 @@ import { oneDark, oneDarkHighlightStyle } from "@codemirror/theme-one-dark";
 import { searchKeymap, highlightSelectionMatches } from "@codemirror/search";
 import { lintKeymap /*linter*/ } from "@codemirror/lint";
 import { commentKeymap } from "@codemirror/comment";
-import hydraKeys from "./hydra-environment/keymaps.js";
+import hydraKeys, { EVAL_BLOCK_EVENT } from "./hydra-environment/keymaps.js";
 import { getLine, getBlock } from "./evalKeymaps";
+import EventEmitter from "eventemitter3";
 import themeObject from "./hydra-environment/theme";
 
-class HydraEditorConfiguration {
-  constructor() {}
+class HydraEditorConfiguration extends EventEmitter {
+  constructor() {
+    super();
+  }
   getConfiguration(autocompleteOptions: CompletionSource): Extension {
+    const self = this;
     const hydraKeymaps = Object.entries(hydraKeys).map(([key, val]) => ({
       key: key,
-      run: (opts) => {
-        console.log("called", val, opts);
-        let text = "";
+      run: (opts: any) => {
+        console.log("called", val, "opts", opts);
+        let text: string | boolean = "";
         if (val === "editor:evalLine") {
           text = getLine(opts);
-        } else if (val === "editor:evalBlock") {
+        } else if (val === EVAL_BLOCK_EVENT) {
           text = getBlock(opts);
         }
         console.log("text", text);
