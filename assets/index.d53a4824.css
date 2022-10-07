@@ -1,0 +1,1 @@
+.cm-editor{height:100vh;width:50vw;border:1px solid #ddd}.cm-scroller{overflow:auto}body{margin:0;overflow:hidden}.cm-editor{background-color:transparent}#app{display:flex;height:100vh}canvas{width:50vw}#editors{position:absolute;display:flex;height:100vh;top:0px;left:0px}
