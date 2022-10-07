@@ -45,11 +45,9 @@ class HydraInstance {
       const [o0, o1, o2, o3] = outputs;
       //@ts-ignore
       const { src, osc, gradient, shape, voronoi, noise } = generators;
-      try {
-        eval(code);
-      } catch (error) {
-        console.log("error: ", error);
-      }
+      //@ts-ignore
+      const time = this.hydra.synth.time;
+      eval(code);
     } catch (e) {
       console.log("e: ", e);
     }
@@ -64,7 +62,7 @@ const h0 = new HydraInstance(getCanvas(APP_ELEMENT));
 const h1 = new HydraInstance(getCanvas(APP_ELEMENT));
 setTimeout(() => {
   h0.eval("osc().out(o0)");
-  console.log("pin");
+  // console.log("pin");
   h1.eval("voronoi().out(o0)");
 }, 1000);
 const hydraAutocomplete = createHydraAutocomplete(h0.hydra);
